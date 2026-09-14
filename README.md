@@ -3,7 +3,7 @@
 > **Thời gian thực hiện**: Tuần 4 (Tháng 9/2026)  
 > **Dự án**: UPAR Multi-Head Pedestrian Attribute Recognition & Video Object Filtering / Retrieval Pipeline  
 > **Thư mục lưu trữ tuần**: `reports/week_04/`  
-> **Phạm vi xử lý**: Tập trung 100% vào bài toán **Lọc & Truy vấn đối tượng người đi bộ trong Video giám sát (Video Surveillance Tracks)**, không sử dụng các tập dữ liệu ảnh tĩnh bên ngoài.
+> **Phạm vi xử lý**: Tập trung 100% vào bài toán **Lọc & Truy vấn đối tượng người đi bộ trong Video giám sát (Video Surveillance Tracks)**.
 
 ---
 
@@ -15,13 +15,10 @@ Trong tuần làm việc này, toàn bộ trọng tâm dự án tập trung vào
 
 | STT | Tên nhiệm vụ / Công việc | Nội dung chi tiết | Tiến độ | Trạng thái |
 |---|---|---|---|---|
-| 1 | **Kiểm toán MD5 & Loại bỏ Video Trùng lặp** | Tính checksum MD5 khẳng định `people-detection.mp4` và `real_pedestrians.mp4` là cùng 1 video (`69dafa7fd143c2bee7f216431304b071`), chuẩn hóa benchmark về 3 video domain thực sự độc lập. | **100%** | Hoàn thành |
-| 2 | **Xây dựng Video Person Database Builder (`build_person_database.py`)** | Xây dựng database trung tâm `reports/tracking/person_database.json` gom nhóm 57 track records từ 4 video chính thức bằng đồ thị `networkx` và tự động chọn ảnh đại diện representative crop. | **100%** | Hoàn thành |
-| 3 | **Phát triển Video Person Retrieval Engine (`query_persons.py`)** | Xây dựng engine truy vấn & lọc các đối tượng track người đi bộ trong video theo thuộc tính UPAR (Gender, Age, Hair, Glasses, Hat, Upper, Lower, Bag), kết hợp Re-ID Cosine Similarity Ranking và tự động gom nhóm GT identity bị ngắt đứt do che khuất. | **100%** | Hoàn thành |
-| 4 | **Cập nhật Báo cáo Kỹ thuật & Số liệu Level 3** | Cập nhật `TECHNICAL_REPORT.md` minh bạch ghi nhận sai sót duplicate, công bố chỉ số Micro EER chuẩn (9.14%), Macro EER (13.70%) với $N=11$ sự kiện re-entry độc lập và 294 cặp negative. | **100%** | Hoàn thành |
-| 5 | **Kiểm thử Lọc Video Thực tế trong Terminal** | Chạy thử nghiệm thực tế các lệnh lọc thuộc tính Nữ giới (`--gender Female`) và lọc Áo đen (`--upper_color Black`) trên 57 track records video, xuất lưới ảnh minh họa khử trùng lặp. | **100%** | Hoàn thành |
-| 6 | **Dựng Video Demo & Cập nhật Repository** | Tạo video demo HD chuyên biệt trình chiếu luồng lọc đối tượng video, commit và push toàn bộ hệ thống lên Git repository. | **100%** | Hoàn thành |
-
+| 1 | **Xây dựng Video Person Database Builder (`build_person_database.py`)** | Xây dựng database trung tâm `reports/tracking/person_database.json` gom nhóm 57 track records từ 4 video chính thức bằng đồ thị `networkx` và tự động chọn ảnh đại diện representative crop. | **100%** | Hoàn thành |
+| 2 | **Phát triển Video Person Retrieval Engine (`query_persons.py`)** | Xây dựng engine truy vấn & lọc các đối tượng track người đi bộ trong video theo thuộc tính UPAR (Gender, Age, Hair, Glasses, Hat, Upper, Lower, Bag), kết hợp Re-ID Cosine Similarity Ranking và tự động gom nhóm GT identity bị ngắt đứt do che khuất. | **100%** | Hoàn thành |
+| 3 | **Cập nhật Báo cáo Kỹ thuật & Số liệu Level 3** | Cập nhật `TECHNICAL_REPORT.md` minh bạch ghi nhận sai sót duplicate, công bố chỉ số Micro EER chuẩn (9.14%), Macro EER (13.70%) với $N=11$ sự kiện re-entry độc lập và 294 cặp negative. | **100%** | Hoàn thành |
+| 4 | **Kiểm thử Lọc Video Thực tế trong Terminal** | Chạy thử nghiệm thực tế các lệnh lọc thuộc tính Nữ giới (`--gender Female`) và lọc Áo đen (`--upper_color Black`) trên 57 track records video, xuất lưới ảnh minh họa khử trùng lặp. | **100%** | Hoàn thành |
 ---
 
 ## 2. Kết quả đạt được
@@ -226,22 +223,15 @@ Người dùng có thể tự chạy các câu lệnh kiểm thử lọc đối 
    * [`reports/week_04/output_videos/real_pedestrians_tracked.mp4`](file:///c:/Users/ADMIN/OneDrive/Documents/GitHub/AI-Project/reports/week_04/output_videos/real_pedestrians_tracked.mp4): Video kết quả tracking, gán BBoxes, Track IDs và nhãn UPAR cho luồng CCTV đường phố `real_pedestrians.mp4`.
    * [`reports/week_04/output_videos/person-bicycle-car-detection_tracked.mp4`](file:///c:/Users/ADMIN/OneDrive/Documents/GitHub/AI-Project/reports/week_04/output_videos/person-bicycle-car-detection_tracked.mp4): Video kết quả tracking cho luồng CCTV giao lộ `person-bicycle-car-detection.mp4`.
    * [`reports/week_04/output_videos/vtest_tracked.mp4`](file:///c:/Users/ADMIN/OneDrive/Documents/GitHub/AI-Project/reports/week_04/output_videos/vtest_tracked.mp4): Video kết quả tracking cho luồng CCTV ngoài trời `vtest.avi`.
-   * [`reports/week_04/output_videos/people-detection_tracked.mp4`](file:///c:/Users/ADMIN/OneDrive/Documents/GitHub/AI-Project/reports/week_04/output_videos/people-detection_tracked.mp4): Video kết quả tracking cho video thử nghiệm `people-detection.mp4`.
    * `reports/week_04/output_videos/store-aisle-detection_tracked.mp4`: Video kết quả tracking cho luồng CCTV siêu thị `store-aisle-detection.mp4`.
 
 ---
 
-## 6. Kết luận & Hướng phát triển tiếp theo
+## 6. Kết luận 
 
 ### Kết luận Tuần 4
 Dự án đã hoàn thành **100% mục tiêu của Tuần 4**:
 1. Xây dựng hoàn chỉnh **Module Lọc & Truy vấn Đối tượng Trong Video (Level 5 Video Person Retrieval Engine)** cho phép tìm kiếm đối tượng người đi bộ linh hoạt theo thuộc tính UPAR và ảnh mẫu Re-ID.
-2. Kiểm toán thành công dữ liệu benchmark video, minh bạch công bố sai sót trùng lặp video và chuẩn hóa số liệu EER Re-ID trên 3 video domain độc lập (Micro EER 9.14%, Macro EER 13.70%).
-3. Cấu trúc đầy đủ bộ tài liệu, code và artifacts chuẩn trong thư mục `reports/week_04/` tuân thủ nghiêm ngặt quy định dự án, tập trung 100% vào dữ liệu video.
 
-### Định hướng Giai đoạn Tiếp theo
-1. **Multi-Camera Global Tracking Architecture**:
-   * Mở rộng từ Single-Camera Re-entry sang bài toán **Multi-Camera Tracking**.
-   * Xây dựng Feature Store trung tâm (Redis / FAISS) lưu trữ 512-dim embedding và thuộc tính để so khớp real-time giữa các góc quay camera khác nhau.
-2. **Giao diện Web UI / API Chuyên nghiệp**:
-   * Đóng gói Video Person Retrieval Query Engine thành Web Service (FastAPI + Streamlit/React UI) hỗ trợ tải ảnh query và chọn bộ lọc thuộc tính trực quan trên trình duyệt.
+
+
